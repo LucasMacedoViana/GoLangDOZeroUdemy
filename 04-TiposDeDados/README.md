@@ -1,4 +1,4 @@
-## Tipos de dados
+# Tipos de dados
 
 ### Números
 inteiros e os reais ( int e o float)
