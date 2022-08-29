@@ -1,5 +1,4 @@
-# Estruturas de Controle
-If e Else
+#If e Else
 
 if init é quando voce consegue inicializar uma variavel diretamente no if
 

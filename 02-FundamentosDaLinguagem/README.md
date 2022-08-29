@@ -1,3 +1,4 @@
+#Pacotes
 Vai ser criado dois pacotes, um com a função Main e outro com uma funcção simples que vai ser chamado no pacote main
 
 quando estamos lidando com mais de um pacote em Go, temos que criar um Modulo

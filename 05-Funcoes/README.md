@@ -12,6 +12,6 @@ As funções podem ter mais de um retorno
 
 Quando a função tiver mais de um retorno temos que colocar cada retorno em uma variavel diferente
 
-caso não queira usar um dos retornos é so usar o underline na posicão do retorno 
+caso não queira usar um dos retornos é so usar o underline na posicão do retorno
 
  
