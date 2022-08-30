@@ -1,8 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"api/src/config"
+	"api/src/router"
+	"fmt"
+	"log"
+	"net/http"
+)
 
 func main()  {
-	fmt.Println("Rodando API")
-
+	config.Carregar()
+	r := router.Gerar()
+	fmt.Printf("Escutando na porta %d", config.Porta)
+	log.Fatalln(http.ListenAndServe(fmt.Sprintf(":%d",config.Porta),r))
 }
