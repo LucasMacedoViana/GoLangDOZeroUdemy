@@ -7,6 +7,6 @@ CREATE TABLE usuarios(
     nome varchar (255) not null,
     nick varchar (255) not null unique,
     email varchar(255) not null unique,
-    senha varchar (20) not null unique,
+    senha varchar (20) not null,
     criadoEm timestamp default current_timestamp
 ) ENGINE=INNODB
