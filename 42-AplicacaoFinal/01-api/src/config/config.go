@@ -17,6 +17,10 @@ var(
 
 	//Senha senha do banco de dados
 	Senha = 0
+
+
+	//SecretKey é a chave que vai ser usada para assinar o token
+	SecretKey []byte
 )
 
 //Carregar vai inicializar as variaveis de ambiente
@@ -35,5 +39,8 @@ func Carregar()  {
 	if erro != nil{
 		Senha = 12345678
 	}
-	StringConexaoBanco = fmt.Sprintf("user=%s dbname=%s password=%v host=localhost sslmode=disable", os.Getenv("DB_USUARIO"), os.Getenv("DB_NOME"), Senha)
+	StringConexaoBanco = fmt.Sprintf(
+		"user=%s dbname=%s password=%v host=localhost sslmode=disable", os.Getenv("DB_USUARIO"), os.Getenv("DB_NOME"), Senha)
+
+	SecretKey = []byte(os.Getenv("SECRET_KEY"))
 }
