@@ -1,7 +1,9 @@
 package modelos
 
 import (
+	"api/src/seguranca"
 	"errors"
+	"github.com/badoux/checkmail"
 	"strings"
 	"time"
 )
@@ -21,10 +23,12 @@ func (usuario *Usuario) Preparar (etapa string) error  {
 	if erro := usuario.validar(etapa); erro!= nil{
 		return erro
 	}
-	usuario.formatar()
+
+	if erro := usuario.formatar(etapa); erro != nil{
+		return erro
+	}
 	return nil
 }
-
 
 //validar ai verificar se os campos nome, nick, email e senha estão preenchidos corretamente
 func (usuario *Usuario) validar (etapa string) error  {
@@ -39,6 +43,9 @@ func (usuario *Usuario) validar (etapa string) error  {
 	if usuario.Email ==""{
 		return errors.New("O e-mail é obrigatorio e não pode estsar em branco!")
 	}
+	if erro := checkmail.ValidateFormat(usuario.Email); erro != nil{
+		return errors.New("O Email inserido é invalido")
+	}
 
 	if etapa == "cadastro" && usuario.Senha ==""{
 		return errors.New("A senha é obrigatorio e não pode estsar em branco!")
@@ -48,9 +55,17 @@ func (usuario *Usuario) validar (etapa string) error  {
 }
 
 // formatar vai retirar os espaços no começo e no final da string
-func (usuario *Usuario) formatar() {
+func (usuario *Usuario) formatar(etapa string) error{
 	usuario.Nome = strings.TrimSpace(usuario.Nome)
 	usuario.Nick = strings.TrimSpace(usuario.Nick)
 	usuario.Email = strings.TrimSpace(usuario.Email)
 
+	if etapa == "cadastro"{
+		senhaHash, erro := seguranca.Hash(usuario.Senha)
+		if erro != nil{
+			return erro
+		}
+		usuario.Senha = string(senhaHash)
+	}
+	return nil
 }
